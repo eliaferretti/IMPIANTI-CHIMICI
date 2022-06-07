@@ -108,3 +108,5 @@ Input: il rapporto G/L (GL), costante di ripartizione (k), rapporto molare del c
 
 ***zF_meno può essere determinata imponendo N_stadiSup_McCabeThiele uguale al numero di stadi superiori ottenuto, arrotondato all’intero successivo. L’equazione va azzerata nell’incognita zF (come primo tentativo si suggerisce zF della miscela entrante). Il risultato ottenuto per zF coincide con zF_meno.
 
+
+Per qualsiasi problema o bug si contatti lo sviluppatore all'indirizzo: eliaferretti@outlook.it
