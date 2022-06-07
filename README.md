@@ -1,4 +1,4 @@
-# IMPIANTI-CHIMICI
+# IMPIANTI CHIMICI
 Libreria di funzioni utili per il corso di "Impianti Chimici" del III anno di studi della laurea triennale in ingegneria chimica
 
 Si presenta una lista delle funzioni presenti nel componente aggiuntivo con una descrizione sintetica dei termini di output e di input
