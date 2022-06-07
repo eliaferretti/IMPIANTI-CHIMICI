@@ -1,3 +1,21 @@
+'	Politecnico di Milano (2022)
+'
+'	Bachelor's degree in Chemical Engineering
+'
+'	This code was developed and tested by Elia Ferretti
+'
+'	You can redistribute the code and/or modify it
+'	Whenever the code is used to produce any publication or document,
+'	reference to this work and author should be reported
+'	No warranty of fitness for a particular purpose is offered
+'	The user must assume the entire risk of using this code
+'
+'
+'------------------------------------------------------------------------------------------------------------
+
+
+
+
 'IMPIANTI CHIMICI'
 
 Function Rachford_Rice(z As Variant, p0 As Variant, p As Double, beta As Double, NC As Integer) As Double
