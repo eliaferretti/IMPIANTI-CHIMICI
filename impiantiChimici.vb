@@ -744,3 +744,66 @@ Function N_stadiInf_McCabeThiele(xD As Double, xB As Double, zF As Double, zF_me
     logI = Log(-(a + delta) / (b + delta))
     N_stadiInf_McCabeThiele = logS / logI
 End Function
+
+                Function Nmin_multicomponente(xD_lightKey As Double, xB_lightKey As Double, xD_heavyKey As Double, xB_heavyKey As Double, alfa_lightKey As Double) As Double
+    Nmin_multicomponente = Log(xD_lightKey * xB_heavyKey / xB_lightKey / xD_heavyKey) / Log(alfa_lightKey)
+End Function
+
+Function underwood_1(alfa As Variant, z As Variant, q As Double, theta As Double, NC As Integer) As Double
+    Dim sum As Double
+    sum = 0
+    
+    For i = 1 To NC
+        sum = sum + (alfa(i) * z(i)) / (alfa(i) - theta)
+    Next
+    
+    underwood_1 = Abs(sum - 1 + q)
+
+End Function
+
+Function underwood_2(Rmin As Double, alfa As Variant, xD_Rmin As Variant, theta As Variant, NC As Integer) As Double
+    Dim sum As Double
+    sum = 0
+    
+    For i = 1 To NC
+        sum = sum + (alfa(i) * xD_Rmin(i)) / (alfa(i) - theta)
+    Next
+    
+    underwood_2 = Abs(sum - 1 - Rmin)
+End Function
+
+Function xD_new_multicomponente(Rmin As Double, k As Double, xD_Rmin As Double, xD_Nmin As Double) As Double
+Dim B As Double
+Dim a As Double
+Dim R As Double
+
+    B = -(Rmin + 1) * (xD_Rmin - xD_Nmin)
+    a = xD_Nmin - B
+    R = k * Rmin
+    
+    xD_new_multicomponente = a + B * R / (R + 1)
+End Function
+
+Function xD_Nmin(Nmin As Double, F As Double, D As Double, alfa As Double, z As Double, xD As Variant, xD_heavyKey As Double, xB_heavyKey As Double, indexDistribuito As Integer, NC As Integer) As Double
+Dim SF As Double
+Dim B As Double
+Dim D_xD As Double
+Dim D_new As Double
+
+    B = F - D
+    SF_hk = xD_heavyKey * D / xB_heavyKey / B
+    
+    SF = SF_hk * (alfa) ^ (Nmin)
+    D_xD = F * z * SF / (1 + SF)
+    
+    D_new = 0
+    For i = 1 To NC
+        If i <> indexDistribuito Then
+            D_new = D_new + D * xD(i)
+        Else
+            D_new = D_new + D_xD
+        End If
+    Next
+    
+    xD_Nmin = D_xD / D_new
+End Function
