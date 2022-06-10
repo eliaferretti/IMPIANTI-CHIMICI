@@ -108,5 +108,27 @@ Input: il rapporto G/L (GL), costante di ripartizione (k), rapporto molare del c
 
 ***zF_meno può essere determinata imponendo N_stadiSup_McCabeThiele uguale al numero di stadi superiori ottenuto, arrotondato all’intero successivo. L’equazione va azzerata nell’incognita zF (come primo tentativo si suggerisce zF della miscela entrante). Il risultato ottenuto per zF coincide con zF_meno.
 
+DISTILLAZIONE MULTICOMPONENTE - NEW !
+
+26)	Nmin_multicomponente
+Output: restituisce il numero di stadi minimo con la correlazione di Fenske (distillazione multicomponente).
+Input: frazione molare del componente chiave leggero nel distillato (xD_lightKey), frazione molare del componente chiave leggero nel bottom (xB_lightKey), frazione molare del componente chiave pesante nel distillato (xD_heavyKey), frazione molare del componente chiave pesante nel bottom (xB_heavyKey), volatilità relativa media del componente chiave leggero (alfa_lightKey).
+
+27)	Underwood_I
+Output: restituisce il valore dell’equazione di Underwood I in valore assoluto (il valore restituito è da azzerare nell’incognita theta, per la quale bisogna fornire un primo tentativo in una cella dedicata).
+Input: vettore delle volatilità relative (alfa), vettore delle composizioni della miscela in ingresso alla colonna(z), fattore entalpico (q), incognita di azzeramento (theta), numero delle specie entranti in colonna (NC).
+
+28)	Underwood_II
+Output: restituisce il valore dell’equazione di Underwood II in valore assoluto (il valore restituito è da azzerare nelle incognite Rmin + xD_Rmin (per ogni componente distribuito), per le quali bisogna fornire un primo tentativo in celle dedicate).
+Input: rapporto di riflusso minimo (Rmin), vettore delle volatilità relative (alfa), vettore delle composizioni del distillato per Rmin - per i componenti NON distribuiti queste coincidono con xD(i) (xD_Rmin), valore theta determinato in precedenza - andranno messi valori diversi di theta per ogni equazione che si scrive (theta), numero delle specie entranti in colonna (NC).
+
+29)	xD_Nmin
+Output: restituisce il valore di frazione molare per il componente distribuito di cui si specificano le variabili nel caso di Nmin.
+Input: numero minimo di stadi determinabile con la funzione 26) (Nmin), Portata in ingresso alla colonna (F), portata del distillato determinata in precedenza con i bilanci materiali (B), volatilità relativa del componente distribuito (alfa), frazione molare del componente distribuito nel feed (z), composizione del distillato (xD), frazione molare del componente chiave pesante nel distillato (xD_heavyKey), frazione molare del componente chiave pesante nel bottom (xB_heavyKey), indice del componente distribuito (indexDistribuito), numero delle specie entranti in colonna (NC).
+
+30)	xD_new_multicomponente
+Output: restituisce il valore di frazione molare per il componente distribuito di cui si specificano le variabili, questo valore va confrontato con quello della precedente iterazione (o di primo tentativo) per decidere se continuare il processo iterativo o fermare la risoluzione.
+Input: rapporto di riflusso minimo (Rmin), rapporto R/Rmin (k), composizione nel distillato del componente distribuito in caso di Rmin (xD_Rmin),  composizione nel distillato del componente distribuito in caso di Nmin (xD_Nmin).
+
 
 Per qualsiasi problema o bug si contatti lo sviluppatore all'indirizzo: eliaferretti@outlook.it
