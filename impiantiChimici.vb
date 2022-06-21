@@ -659,8 +659,10 @@ Dim X2_sgn As Double
      End If
 End Function
 
-Function Xi(wi As Variant, PM As Variant, NC As Integer, specie As Integer) As Double
+Function xi(wi As Variant, PM As Variant, NC As Integer, specie As Integer) As Double
 Dim PMmix As Double
+Dim i As Integer
+
     PMmix = 0
     For i = 1 To NC
         If wi(i) <> 0 Then
@@ -669,19 +671,21 @@ Dim PMmix As Double
     Next
     PMmix = 1 / PMmix
     If wi(specie) <> 0 Then
-        Xi = wi(specie) * PMmix / PM(specie)
+        xi = wi(specie) * PMmix / PM(specie)
     Else
-        Xi = 0
+        xi = 0
     End If
 End Function
 
-Function wi(Xi As Variant, PM As Variant, NC As Integer, specie As Integer) As Double
+Function wi(xi As Variant, PM As Variant, NC As Integer, specie As Integer) As Double
 Dim PMmix As Double
+Dim i As Integer
+
     PMmix = 0
     For i = 1 To NC
-        PMmix = PMmix + Xi(i) * PM(i)
+        PMmix = PMmix + xi(i) * PM(i)
     Next
-    wi = Xi(specie) * PM(specie) / PMmix
+    wi = xi(specie) * PM(specie) / PMmix
 End Function
 
 Function deltaT_LM(T_hot1 As Double, T_hot2 As Double, T_cold1 As Double, T_cold2 As Double) As Double
@@ -806,4 +810,42 @@ Dim D_new As Double
     Next
     
     xD_Nmin = D_xD / D_new
+End Function
+
+Function xi_vector(wi As Variant, PM As Variant, NC As Integer) As Double
+Dim PMmix As Double
+Dim i As Integer
+Dim frac(1000) as Variant
+
+    PMmix = 0
+    For i = 1 To NC
+        If wi(i) <> 0 Then
+            PMmix = PMmix + wi(i) / PM(i)
+        End If
+    Next
+    PMmix = 1 / PMmix
+	
+	For i = 0 To NC
+		If wi(i) <> 0 Then
+			frac(i) = wi(i+1) * PMmix / PM(i+1)
+		Else
+			frac(i) = 0
+		End If
+	Next
+	xi_vector = frac
+End Function
+
+Function wi_vector(xi As Variant, PM As Variant, NC As Integer) As Double
+Dim PMmix As Double
+Dim i As Integer
+
+    PMmix = 0
+    For i = 1 To NC
+        PMmix = PMmix + xi(i) * PM(i)
+    Next
+	
+	For i = 0 To NC
+		frac(i) = xi(i+1) * PM(i+1) / PMmix
+	Next
+	wi_vector = frac
 End Function
