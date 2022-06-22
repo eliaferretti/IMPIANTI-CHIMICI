@@ -58,10 +58,9 @@ Input: rapporto di riflusso (R), rapporto di riflusso minimo (Rmin), numero di s
 Output: restituisce il numero di stadi di equilibrio di una colonna standard con la correlazione di Molokanov
 Input: rapporto di riflusso (R), rapporto di riflusso minimo (Rmin), numero di stadi minimo (Nmin).
 
-15)	xB_batchMultistadio
+15)	xB_batchMultistadio**
 Output: restituisce la frazione molare del componente più volatile nella storta
 Input: frazione molare del componente più volatile nel distillato (xD), rapporto di recupero (R), numero di stadi della colonna, storta inclusa (N), volatilità relativa media (alfa).
-
 
 16)	kremser_N_assorbimento
 Output: restituisce il numero di stadi di equilibrio necessari per l’assorbimento di una specie nell’ipotesi
@@ -89,7 +88,6 @@ Input: fattore di assorbimento (A), rapporto molare del componente migrante nell
 Output: restituisce il rapporto molare del componente migrante nella corrente pesante in uscita nello stripping nell’ipotesi di cascate lineari (problema di verifica)
 Input: fattore di assorbimento (A), numero di stadi (N), rapporto molare del componente migrante nella frase pesante in ingresso (XN1), rapporto molare del componente migrante nella fase leggera in ingresso (Y0), costante di ripartizione (k).
 
-
 22)	kremser_N_nonLin_stripping
 Output: restituisce il numero di stadi di equilibrio necessari per lo stripping di una corrente SENZA
 l’ipotesi di cascate lineari (problema di progetto).
@@ -105,8 +103,6 @@ Input: fattore di stripping (S), costante di ripartizione (k), rapporto molare d
 25)	NUT_2
 Output: restituisce il numero di unità di trasferimento NUT.
 Input: il rapporto G/L (GL), costante di ripartizione (k), rapporto molare del componente migrante in fase gas in ingresso (y1), rapporto molare del componente migrante in fase gas in uscita, ovvero la specifica (y2), rapporto molare del componente migrante nella corrente liquida in ingresso (x2).
-
-***zF_meno può essere determinata imponendo N_stadiSup_McCabeThiele uguale al numero di stadi superiori ottenuto, arrotondato all’intero successivo. L’equazione va azzerata nell’incognita zF (come primo tentativo si suggerisce zF della miscela entrante). Il risultato ottenuto per zF coincide con zF_meno.
 
 DISTILLAZIONE MULTICOMPONENTE - NEW !
 
@@ -129,6 +125,29 @@ Input: numero minimo di stadi determinabile con la funzione 26) (Nmin), Portata 
 30)	xD_new_multicomponente
 Output: restituisce il valore di frazione molare per il componente distribuito di cui si specificano le variabili, questo valore va confrontato con quello della precedente iterazione (o di primo tentativo) per decidere se continuare il processo iterativo o fermare la risoluzione.
 Input: rapporto di riflusso minimo (Rmin), rapporto R/Rmin (k), composizione nel distillato del componente distribuito in caso di Rmin (xD_Rmin),  composizione nel distillato del componente distribuito in caso di Nmin (xD_Nmin).
+
+
+**La distillazione batch può essere risolta nel modo seguente:
+RAPPORTO di RIFLUSSO COSTANTE:
+Si discretizzino valori di xB (partendo da xB0 con un passo di massimo 0.05)
+In corrispondenza di questi valori si ipotizzi una composizione di distillato xD (un primo tentativo sensato è 0.8/0.9)
+Si usi la funzione "xB_batchMultistadio" per determinare il valore di xB corrispondente con il valore di xD ipotizzato.
+A questo punto si usi la ricerca obiettivo per modificare xD (precedentemente ipotizzato) in modo che la differenza
+tra xB fornito dalla funzione coincida con quello della discretizzazione.
+La procedura dev'essere ripetuta per ogni valore di xB discretizzato, a tal fine si consiglia l'installazione della seguente macro:
+https://github.com/eliaferretti/azzeramento-Excel
+FRAZIONE MOLARE di DISTILLATO COSTANTE:
+Si discretizzino valori di xB (partendo da xB0 con un passo di massimo 0.05)
+In corrispondenza di questi valori si ipotizzi un valore del rapporto di riflusso R (un primo tentativo sensato è 2/3)
+Si usi la funzione "xB_batchMultistadio" per determinare il valore di xB corrispondente con il valore di R ipotizzato.
+A questo punto si usi la ricerca obiettivo per modificare R (precedentemente ipotizzato) in modo che la differenza
+tra xB fornito dalla funzione coincida con quello della discretizzazione.
+La procedura dev'essere ripetuta per ogni valore di xB discretizzato, a tal fine si consiglia l'installazione della seguente macro:
+https://github.com/eliaferretti/azzeramento-Excel
+
+***zF_meno può essere determinata imponendo N_stadiSup_McCabeThiele uguale al numero di stadi superiori ottenuto arrotondato all’intero successivo.
+L’equazione va azzerata nell’incognita zF (come primo tentativo si suggerisce zF della miscela entrante).
+Il risultato ottenuto per zF coincide con zF_meno.
 
 
 Per qualsiasi problema o bug si contatti lo sviluppatore all'indirizzo: eliaferretti@outlook.it
