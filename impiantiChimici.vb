@@ -811,3 +811,15 @@ Dim D_new As Double
     
     xD_Nmin = D_xD / D_new
 End Function
+
+Function Nsup_Kirckbride(N_stadi As Double, z_hk As Double, z_lk As Double, xD_hk As Double, xB_lk As Double, B As Double, D As Double) As Double
+
+    Dim par As Double
+    
+    par = (z_hk / z_lk * (xB_lk / xD_hk) ^ (2) * B / D) ^ (0.206)
+    
+    Nsup_Kirckbride = N_stadi * par / (1 + par)
+    
+    Nsup_Kirckbride = Nsup_Kirckbride - 0.5 * Log(N_stadi) / Log(10)
+
+End Function
