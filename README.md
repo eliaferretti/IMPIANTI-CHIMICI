@@ -136,6 +136,7 @@ A questo punto si usi la ricerca obiettivo per modificare xD (precedentemente ip
 tra xB fornito dalla funzione coincida con quello della discretizzazione.
 La procedura dev'essere ripetuta per ogni valore di xB discretizzato, a tal fine si consiglia l'installazione della seguente macro:
 https://github.com/eliaferretti/azzeramento-Excel
+
 FRAZIONE MOLARE di DISTILLATO COSTANTE:
 Si discretizzino valori di xB (partendo da xB0 con un passo di massimo 0.05)
 In corrispondenza di questi valori si ipotizzi un valore del rapporto di riflusso R (un primo tentativo sensato è 2/3)
