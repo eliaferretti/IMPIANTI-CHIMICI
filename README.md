@@ -128,7 +128,7 @@ Input: rapporto di riflusso minimo (Rmin), rapporto R/Rmin (k), composizione nel
 
 31) Nsup_Kirckbride
 Output: restituisce il numero di stadi superiori per una colonna multicomponente stimati con l'equazione di Kirckbride
-Input: Numero di stadi (totali) ottenuti con Fenske o Molokanov NON arrotondati, frazione molare del componente chiave pesante nel feed (z_hk), frazione molare del componente chiave leggero nel feed (z_lk), frazione molare del componente chiave pesante nel distillato (xD_hk), frazione molare del componente chiave leggero nel bottom (xB_lk), portata di distillato (D), portata di prodotti di coda (B).
+Input: Numero di stadi totali ottenuti con Fenske o Molokanov NON arrotondati (N_stadi), frazione molare del componente chiave pesante nel feed (z_hk), frazione molare del componente chiave leggero nel feed (z_lk), frazione molare del componente chiave pesante nel distillato (xD_hk), frazione molare del componente chiave leggero nel bottom (xB_lk), portata di distillato (D), portata di prodotti di coda (B).
 
 **La distillazione batch può essere risolta nel modo seguente:
 RAPPORTO di RIFLUSSO COSTANTE:
