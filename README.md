@@ -111,11 +111,11 @@ Output: restituisce il numero di stadi minimo con la correlazione di Fenske (dis
 Input: frazione molare del componente chiave leggero nel distillato (xD_lightKey), frazione molare del componente chiave leggero nel bottom (xB_lightKey), frazione molare del componente chiave pesante nel distillato (xD_heavyKey), frazione molare del componente chiave pesante nel bottom (xB_heavyKey), volatilità relativa media del componente chiave leggero (alfa_lightKey).
 
 27)	Underwood_I
-Output: restituisce il valore dell’equazione di Underwood I in valore assoluto (il valore restituito è da azzerare nell’incognita theta, per la quale bisogna fornire un primo tentativo in una cella dedicata).
+Output: restituisce il valore dell’equazione di Underwood I (il valore restituito è da azzerare nell’incognita theta, per la quale bisogna fornire un primo tentativo in una cella dedicata).
 Input: vettore delle volatilità relative (alfa), vettore delle composizioni della miscela in ingresso alla colonna(z), fattore entalpico (q), incognita di azzeramento (theta), numero delle specie entranti in colonna (NC).
 
 28)	Underwood_II
-Output: restituisce il valore dell’equazione di Underwood II in valore assoluto (il valore restituito è da azzerare nelle incognite Rmin + xD_Rmin (per ogni componente distribuito), per le quali bisogna fornire un primo tentativo in celle dedicate).
+Output: restituisce il valore dell’equazione di Underwood II (il valore restituito è da azzerare nelle incognite Rmin + xD_Rmin (per ogni componente distribuito), per le quali bisogna fornire un primo tentativo in celle dedicate).
 Input: rapporto di riflusso minimo (Rmin), vettore delle volatilità relative (alfa), vettore delle composizioni del distillato per Rmin - per i componenti NON distribuiti queste coincidono con xD(i) (xD_Rmin), valore theta determinato in precedenza - andranno messi valori diversi di theta per ogni equazione che si scrive (theta), numero delle specie entranti in colonna (NC).
 
 29)	xD_Nmin
