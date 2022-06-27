@@ -823,3 +823,11 @@ Function Nsup_Kirckbride(N_stadi As Double, z_hk As Double, z_lk As Double, xD_h
     Nsup_Kirckbride = Nsup_Kirckbride - 0.5 * Log(N_stadi) / Log(10)
 
 End Function
+
+Function Nstadi_CrossFlow_CascateLineari(E As Double, K As Double, YN As Double, Y0 As Double, X0 As Double)
+    Nstadi_CrossFlow_CascateLineari = Log((YN - K * X0) / (Y0 - K * X0)) / Log(E / (E + 1))
+End Function
+
+Function YN_CrossFlow_CascateLineari(E As Double, K As Double, Y0 As Double, X0 As Double, N As Double)
+    YN_CrossFlow_CascateLineari = K * X0 + (Y0 - K * X0) * (E / (E + 1)) ^ (N)
+End Function
