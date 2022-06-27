@@ -130,6 +130,15 @@ Input: rapporto di riflusso minimo (Rmin), rapporto R/Rmin (k), composizione nel
 Output: restituisce il numero di stadi superiori per una colonna multicomponente stimati con l'equazione di Kirckbride
 Input: Numero di stadi totali ottenuti con Fenske o Molokanov NON arrotondati (N_stadi), frazione molare del componente chiave pesante nel feed (z_hk), frazione molare del componente chiave leggero nel feed (z_lk), frazione molare del componente chiave pesante nel distillato (xD_hk), frazione molare del componente chiave leggero nel bottom (xB_lk), portata di prodotti di coda (B), portata di distillato (D).
 
+32) Nstadi_CrossFlow_CascateLineari(E As Double, K As Double, YN As Double, Y0 As Double, X0 As Double)
+Ouput: restituisce il numero di stadi per l'assorbimento in cross-flow (problema di progetto)
+Input: Fattore di estrazione (E), Costante di ripartizione (K), rapporto molare nella corrente leggera purificata, specifica di progetto (YN), rapporto molare nella corrente leggera da purificare (Y0), rapporto molare nella fase pesante entrante (X0).
+
+33) YN_CrossFlow_CascateLineari
+Ouput: restituisce il rapporto molare nella corrente purificata per l'assorbimento in cross-flow (problema di verifica)
+Input: Fattore di estrazione (E), Costante di ripartizione (K), rapporto molare nella corrente leggera da purificare (Y0), rapporto molare nella fase pesante entrante (X0), numero di stadi (N).
+
+
 **La distillazione batch può essere risolta nel modo seguente:
 RAPPORTO di RIFLUSSO COSTANTE:
 Si discretizzino valori di xB (partendo da xB0 con un passo di massimo 0.05)
