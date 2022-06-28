@@ -19,8 +19,8 @@
 'IMPIANTI CHIMICI'
 
 Function Rachford_Rice(z As Variant, p0 As Variant, p As Double, beta As Double, NC As Integer) As Double
-Dim k(1000) As Variant
-Dim i As Integer
+	Dim k(1000) As Variant
+	Dim i As Integer
 
     For i = 1 To NC
     k(i) = p0(i) / p
@@ -33,8 +33,8 @@ Dim i As Integer
 End Function
 
 Function Flash_pRR(z As Variant, p0 As Variant, p As Double, RR As Double, specie As Integer, fase As String, NC As Integer) As Double
-Dim k(1000) As Variant
-Dim i As Integer
+	Dim k(1000) As Variant
+	Dim i As Integer
 
     If (fase = "V") Then
         RRV = RR
@@ -53,8 +53,8 @@ Dim i As Integer
     Next
 End Function
 
-Function Antoine(a As Double, B As Double, c As Double, T_inK As Double, baseLog As Double, unitaPressioneFormula As String, unitaTemperaturaFormula As String, unitaPressioneDesiderata As String) As Double
-Dim T As Double
+Function p0_Antoine(a As Double, B As Double, c As Double, T_inK As Double, baseLog As Double, unitaPressioneFormula As String, unitaTemperaturaFormula As String, unitaPressioneDesiderata As String) As Double
+	Dim T As Double
     If unitaTemperaturaFormula = "K" Then
         T = T_inK
     ElseIf unitaTemperaturaFormula = "°C" Then
@@ -75,36 +75,36 @@ Dim T As Double
     End If
     
     If unitaPressioneDesiderata = "Pa" Then
-        Antoine = p
+        p0_Antoine = p
     ElseIf unitaPressioneDesiderata = "bar" Then
-        Antoine = p / 100000
+        p0_Antoine = p / 100000
     ElseIf unitaPressioneDesiderata = "atm" Then
-        Antoine = p / 101325
+        p0_Antoine = p / 101325
     ElseIf unitaPressioneDesiderata = "mmHg" Then
-        Antoine = p / 133.322368
+        p0_Antoine = p / 133.322368
     End If
 End Function
 
-Function N_stadi(q As Double, xD As Double, xB As Double, zF As Double, alfa As Double, k_rappRecupero As Double) As Integer
-Dim beta As Double
-Dim gamma As Double
-Dim delta As Double
-Dim a As Double
-Dim B As Double
-Dim c As Double
-Dim sol_1 As Double
-Dim sol_2 As Double
-Dim xF As Double
-Dim yF As Double
-Dim x_sgn As Double
-Dim y_sgn As Double
-Dim x(1000) As Variant
-Dim y(1000) As Variant
-Dim check As Integer
-Dim i As Integer
-Dim intercetta As Double
-Dim stadi_superiori As Integer
-Dim stadi_inferiori As Integer
+Function N_stadi_asInteger(q As Double, xD As Double, xB As Double, zF As Double, alfa As Double, k_rappRecupero As Double) As Integer
+	Dim beta As Double
+	Dim gamma As Double
+	Dim delta As Double
+	Dim a As Double
+	Dim B As Double
+	Dim c As Double
+	Dim sol_1 As Double
+	Dim sol_2 As Double
+	Dim xF As Double
+	Dim yF As Double
+	Dim x_sgn As Double
+	Dim y_sgn As Double
+	Dim x(1000) As Variant
+	Dim y(1000) As Variant
+	Dim check As Integer
+	Dim i As Integer
+	Dim intercetta As Double
+	Dim stadi_superiori As Integer
+	Dim stadi_inferiori As Integer
 
     If q <> 1 And q <> 0 Then
         beta = q / (q - 1)
@@ -172,31 +172,30 @@ Dim stadi_inferiori As Integer
         End If
         i = i + 1
     Wend
-    N_stadi = i
-    stadi_inferiori = N_stadi - stadi_superiori
+    N_stadi_asInteger = i
 End Function
 
-Function N_stadiInf(q As Double, xD As Double, xB As Double, zF As Double, alfa As Double, k_rappRecupero As Double) As Integer
-Dim beta As Double
-Dim gamma As Double
-Dim delta As Double
-Dim a As Double
-Dim B As Double
-Dim c As Double
-Dim sol_1 As Double
-Dim sol_2 As Double
-Dim xF As Double
-Dim yF As Double
-Dim x_sgn As Double
-Dim y_sgn As Double
-Dim x(1000) As Variant
-Dim y(1000) As Variant
-Dim check As Integer
-Dim i As Integer
-Dim intercetta As Double
-Dim stadi_superiori As Integer
-Dim stadi_inferiori As Integer
-Dim N_stadi As Integer
+Function N_stadiInf_asInteger(q As Double, xD As Double, xB As Double, zF As Double, alfa As Double, k_rappRecupero As Double) As Integer
+	Dim beta As Double
+	Dim gamma As Double
+	Dim delta As Double
+	Dim a As Double
+	Dim B As Double
+	Dim c As Double
+	Dim sol_1 As Double
+	Dim sol_2 As Double
+	Dim xF As Double
+	Dim yF As Double
+	Dim x_sgn As Double
+	Dim y_sgn As Double
+	Dim x(1000) As Variant
+	Dim y(1000) As Variant
+	Dim check As Integer
+	Dim i As Integer
+	Dim intercetta As Double
+	Dim stadi_superiori As Integer
+	Dim stadi_inferiori As Integer
+	Dim N_stadi As Integer
 
     If q <> 1 And q <> 0 Then
         beta = q / (q - 1)
@@ -268,65 +267,66 @@ Dim N_stadi As Integer
         i = i + 1
     Wend
     N_stadi = i
-    N_stadiInf = N_stadi - stadi_superiori
+    N_stadiInf_asInteger = N_stadi - stadi_superiori
 End Function
 
-Function N_stadiSup(q As Double, xD As Double, xB As Double, zF As Double, alfa As Double, k_rappRecupero As Double) As Integer
-Dim beta As Double
-Dim gamma As Double
-Dim delta As Double
-Dim a As Double
-Dim B As Double
-Dim c As Double
-Dim sol_1 As Double
-Dim sol_2 As Double
-Dim xF As Double
-Dim yF As Double
-Dim x_sgn As Double
-Dim y_sgn As Double
-Dim x(1000) As Variant
-Dim y(1000) As Variant
-Dim check As Integer
-Dim i As Integer
-Dim intercetta As Double
-Dim stadi_superiori As Integer
-Dim stadi_inferiori As Integer
+Function N_stadiSup_asInteger(q As Double, xD As Double, xB As Double, zF As Double, alfa As Double, k_rappRecupero As Double) As Integer
+	Dim beta As Double
+	Dim gamma As Double
+	Dim delta As Double
+	Dim a As Double
+	Dim B As Double
+	Dim c As Double
+	Dim sol_1 As Double
+	Dim sol_2 As Double
+	Dim xF As Double
+	Dim yF As Double
+	Dim x_sgn As Double
+	Dim y_sgn As Double
+	Dim x(1000) As Variant
+	Dim y(1000) As Variant
+	Dim check As Integer
+	Dim i As Integer
+	Dim intercetta As Double
+	Dim stadi_superiori As Integer
+	Dim stadi_inferiori As Integer
 
-If q <> 1 And q <> 0 Then
-    beta = q / (q - 1)
-    gamma = zF / (q - 1)
-    
-    a = beta * (alfa - 1)
-    B = beta - alfa - gamma * (alfa - 1)
-    c = -gamma
-    
-    delta = (B) ^ (2) - 4 * a * c
-    sol_1 = (-B + (delta) ^ (0.5)) / (2 * a)
-    sol_2 = (-B - (delta) ^ (0.5)) / (2 * a)
-    If sol_1 > 0 And sol_1 < 1 Then
-        x_sgn = sol_1
-    ElseIf sol_2 > 0 And sol_2 < 1 Then
-        x_sgn = sol_2
-    End If
-    
-    y_sgn = beta * x_sgn - gamma
-    m = (xD - y_sgn) / (xD - x_sgn)
-    R_min = m / (1 - m)
-    R = k_rappRecupero * R_min
-    
-    xF = (gamma + xD / (R + 1)) / (beta - R / (R + 1))
-    yF = beta * xF - gamma
-    
-ElseIf q = 1 Then
-    x_sgn = zF
-    y_sgn = alfa * x_sgn / (1 + x_sgn * (alfa - 1))
-    m = (xD - y_sgn) / (xD - x_sgn)
-    R_min = m / (1 - m)
-    R = k_rappRecupero * R_min
-    
-    xF = x_sgn
-    yF = R / (R + 1) * xF + xD / (R + 1)
-ElseIf q = 0 Then
+	If q <> 1 And q <> 0 Then
+		beta = q / (q - 1)
+		gamma = zF / (q - 1)
+		
+		a = beta * (alfa - 1)
+		B = beta - alfa - gamma * (alfa - 1)
+		c = -gamma
+		
+		delta = (B) ^ (2) - 4 * a * c
+		sol_1 = (-B + (delta) ^ (0.5)) / (2 * a)
+		sol_2 = (-B - (delta) ^ (0.5)) / (2 * a)
+		If sol_1 > 0 And sol_1 < 1 Then
+			x_sgn = sol_1
+		ElseIf sol_2 > 0 And sol_2 < 1 Then
+			x_sgn = sol_2
+		End If
+		
+		y_sgn = beta * x_sgn - gamma
+		m = (xD - y_sgn) / (xD - x_sgn)
+		R_min = m / (1 - m)
+		R = k_rappRecupero * R_min
+		
+		xF = (gamma + xD / (R + 1)) / (beta - R / (R + 1))
+		yF = beta * xF - gamma
+		
+	ElseIf q = 1 Then
+		x_sgn = zF
+		y_sgn = alfa * x_sgn / (1 + x_sgn * (alfa - 1))
+		m = (xD - y_sgn) / (xD - x_sgn)
+		R_min = m / (1 - m)
+		R = k_rappRecupero * R_min
+		
+		xF = x_sgn
+		yF = R / (R + 1) * xF + xD / (R + 1)
+		
+	ElseIf q = 0 Then
         y_sgn = zF
         x_sgn = y_sgn / (alfa + y_sgn * (1 - alfa))
         m = (xD - y_sgn) / (xD - x_sgn)
@@ -334,7 +334,8 @@ ElseIf q = 0 Then
         R = k_rappRecupero * R_min
         yF = y_sgn
         xF = (R + 1) / R * yF - xD / R
-End If
+	End If
+	
     y(1) = xD
     check = 1
     i = 0
@@ -347,64 +348,64 @@ End If
             check = 0
         End If
     Wend
-    N_stadiSup = i
+    N_stadiSup_asInteger = i
 End Function
 
 Function Rmin(q As Double, xD As Double, zF As Double, alfa As Double) As Double
-Dim beta As Double
-Dim gamma As Double
-Dim delta As Double
-Dim a As Double
-Dim B As Double
-Dim c As Double
-Dim sol_1 As Double
-Dim sol_2 As Double
-Dim x_sgn As Double
-Dim y_sgn As Double
-Dim check As Integer
-Dim i As Integer
-Dim intercetta As Double
+	Dim beta As Double
+	Dim gamma As Double
+	Dim delta As Double
+	Dim a As Double
+	Dim B As Double
+	Dim c As Double
+	Dim sol_1 As Double
+	Dim sol_2 As Double
+	Dim x_sgn As Double
+	Dim y_sgn As Double
+	Dim check As Integer
+	Dim i As Integer
+	Dim intercetta As Double
 
-If q <> 1 And q <> 0 Then
-    beta = q / (q - 1)
-    gamma = zF / (q - 1)
-    
-    a = beta * (alfa - 1)
-    B = beta - alfa - gamma * (alfa - 1)
-    c = -gamma
-    
-    delta = (B) ^ (2) - 4 * a * c
-    sol_1 = (-B + (delta) ^ (0.5)) / (2 * a)
-    sol_2 = (-B - (delta) ^ (0.5)) / (2 * a)
-    If sol_1 > 0 And sol_1 < 1 Then
-        x_sgn = sol_1
-    ElseIf sol_2 > 0 And sol_2 < 1 Then
-        x_sgn = sol_2
-    End If
-    
-    y_sgn = beta * x_sgn - gamma
-    m = (xD - y_sgn) / (xD - x_sgn)
-    Rmin = m / (1 - m)
-ElseIf q = 1 Then
-    x_sgn = zF
-    y_sgn = alfa * x_sgn / (1 + x_sgn * (alfa - 1))
-    m = (xD - y_sgn) / (xD - x_sgn)
-    Rmin = m / (1 - m)
-ElseIf q = 0 Then
-    y_sgn = zF
-    x_sgn = y_sgn / (alfa + y_sgn * (1 - alfa))
-    m = (xD - y_sgn) / (xD - x_sgn)
-    Rmin = m / (1 - m)
-End If
+	If q <> 1 And q <> 0 Then
+		beta = q / (q - 1)
+		gamma = zF / (q - 1)
+		
+		a = beta * (alfa - 1)
+		B = beta - alfa - gamma * (alfa - 1)
+		c = -gamma
+		
+		delta = (B) ^ (2) - 4 * a * c
+		sol_1 = (-B + (delta) ^ (0.5)) / (2 * a)
+		sol_2 = (-B - (delta) ^ (0.5)) / (2 * a)
+		If sol_1 > 0 And sol_1 < 1 Then
+			x_sgn = sol_1
+		ElseIf sol_2 > 0 And sol_2 < 1 Then
+			x_sgn = sol_2
+		End If
+		
+		y_sgn = beta * x_sgn - gamma
+		m = (xD - y_sgn) / (xD - x_sgn)
+		Rmin = m / (1 - m)
+	ElseIf q = 1 Then
+		x_sgn = zF
+		y_sgn = alfa * x_sgn / (1 + x_sgn * (alfa - 1))
+		m = (xD - y_sgn) / (xD - x_sgn)
+		Rmin = m / (1 - m)
+	ElseIf q = 0 Then
+		y_sgn = zF
+		x_sgn = y_sgn / (alfa + y_sgn * (1 - alfa))
+		m = (xD - y_sgn) / (xD - x_sgn)
+		Rmin = m / (1 - m)
+	End If
 End Function
 
-Function Nmin(xD As Double, xB As Double, alfa As Double) As Double
-    Nmin = Log(xD * (1 - xB) / (1 - xD) / xB) / Log(alfa)
+Function Nmin_distillazioneBinaria(xD As Double, xB As Double, alfa As Double) As Double
+    Nmin_distillazioneBinaria = Log(xD * (1 - xB) / (1 - xD) / xB) / Log(alfa)
 End Function
 
 Function N_stadi_Eduljee(R As Double, Rmin As Double, Nmin As Double) As Double
-Dim F As Double
-Dim phi As Double
+	Dim F As Double
+	Dim phi As Double
 
     F = (R - Rmin) / (R + 1)
     phi = 0.75 - 0.75 * (F) ^ (0.5668)
@@ -412,17 +413,17 @@ Dim phi As Double
 End Function
 
 Function N_stadi_Molokanov(R As Double, Rmin As Double, Nmin As Double) As Double
-Dim F As Double
-Dim phi As Double
+	Dim F As Double
+	Dim phi As Double
     F = (R - Rmin) / (R + 1)
     phi = 1 - Exp(((1 + 54.4 * F) / (11 + 117.2 * F)) * ((F - 1) / (F) ^ (0.5)))
     N_stadi_Molokanov = (phi + Nmin) / (1 - phi)
 End Function
 
 Function xB_batchMultistadio(xD As Double, R As Double, N As Integer, alfa As Double) As Double
-Dim x(1000) As Variant
-Dim y(1000) As Variant
-Dim i As Integer
+	Dim x(1000) As Variant
+	Dim y(1000) As Variant
+	Dim i As Integer
 
     y(1) = xD
     For i = 1 To N
@@ -433,26 +434,26 @@ Dim i As Integer
 End Function
 
 'ASSORBIMENTO
-Function kremser_N_assorbimento(E As Double, XN1 As Double, Y0 As Double, YN As Double, k As Double) As Double
+Function N_stadi_assorbimentoKremser_cascateLineari(E As Double, XN1 As Double, Y0 As Double, YN As Double, k As Double) As Double
     Dim alfa As Double
     Dim Yeq As Double
         
     Yeq = k * XN1
     alfa = ((Yeq - Y0) - (YN - Y0)) / ((Yeq - Y0) - E * (YN - Y0))
-    kremser_N_assorbimento = Log(alfa) / Log(E)
+    N_stadi_assorbimentoKremser_cascateLineari = Log(alfa) / Log(E)
 End Function
 
-Function kremser_YN_assorbimento(E As Double, N As Double, XN1 As Double, Y0 As Double, k As Double) As Double
+Function YN_assorbimentoKremser_cascateLineari(E As Double, N As Double, XN1 As Double, Y0 As Double, k As Double) As Double
     Dim alfa As Double
     Dim beta As Double
     Dim Yeq As Double
     Yeq = k * XN1
     alfa = Y0 * (E) ^ (N) * (E - 1) / ((E) ^ (N + 1) - 1)
     beta = Yeq * ((E) ^ (N) - 1) / ((E) ^ (N + 1) - 1)
-    kremser_YN_assorbimento = alfa + beta
+    YN_assorbimentoKremser_cascateLineari = alfa + beta
 End Function
 
-Function kremser_N_nonLin_assorbimento(k As Double, YN As Double, Y0 As Double, XN1 As Double, LG As Double) As Double
+Function N_stadi_assorbimentoKremser(k As Double, YN As Double, Y0 As Double, XN1 As Double, LG As Double) As Double
     Dim a As Double
     Dim B As Double
     Dim D As Double
@@ -480,7 +481,7 @@ Function kremser_N_nonLin_assorbimento(k As Double, YN As Double, Y0 As Double, 
         
         num = 1 / (YN - Yi) - 1 / (a - B - 2 * Yi)
         den = 1 / (Y0 - Yi) - 1 / (a - B - 2 * Yi)
-        kremser_N_nonLin_assorbimento = Log(num / den) / Log((a - Yi) / (B + Yi))
+        N_stadi_assorbimentoKremser = Log(num / den) / Log((a - Yi) / (B + Yi))
     Else
         teta1 = Atn((-delta) ^ (0.5) / (2 * YN - a + B))
         teta2 = Atn((-delta) ^ (0.5) / (2 * Y0 - a + B))
@@ -492,27 +493,27 @@ Function kremser_N_nonLin_assorbimento(k As Double, YN As Double, Y0 As Double, 
                 min = (teta2 - teta1 + phi * pi) / teta3
             End If
         Next
-        kremser_N_nonLin_assorbimento = min
+        N_stadi_assorbimentoKremser = min
     End If
 End Function
 
 Function LGmin_assorbimento(k As Double, XN1 As Double, YN As Double, Y0 As Double) As Double
-Dim alfa As Double
-Dim beta1 As Double
-Dim beta2 As Double
-Dim gamma1 As Double
-Dim gamma2 As Double
-Dim a As Double
-Dim B As Double
-Dim c As Double
-Dim q1 As Double
-Dim q2 As Double
-Dim q3 As Double
-Dim X0eq As Double
-Dim X1 As Double
-Dim x2 As Double
-Dim y1 As Double
-Dim y2 As Double
+	Dim alfa As Double
+	Dim beta1 As Double
+	Dim beta2 As Double
+	Dim gamma1 As Double
+	Dim gamma2 As Double
+	Dim a As Double
+	Dim B As Double
+	Dim c As Double
+	Dim q1 As Double
+	Dim q2 As Double
+	Dim q3 As Double
+	Dim X0eq As Double
+	Dim X1 As Double
+	Dim x2 As Double
+	Dim y1 As Double
+	Dim y2 As Double
 
     X0eq = Y0 / (k + Y0 * (k - 1))
     alfa = 1 - k
@@ -548,26 +549,26 @@ Dim y2 As Double
 End Function
 
 'STRIPPING
-Function kremser_N_stripping(a As Double, XN1 As Double, Y0 As Double, X1 As Double, k As Double) As Double
+Function N_stadi_strippingKremser_cascateLineari(a As Double, XN1 As Double, Y0 As Double, X1 As Double, k As Double) As Double
     Dim alfa As Double
     Dim Xeq As Double
         
     Xeq = Y0 / k
     alfa = ((Xeq - XN1) - (X1 - XN1)) / ((Xeq - XN1) - a * (X1 - XN1))
-    kremser_N_stripping = Log(alfa) / Log(a)
+    N_stadi_strippingKremser_cascateLineari = Log(alfa) / Log(a)
 End Function
 
-Function kremser_X1_stripping(a As Double, N As Double, XN1 As Double, Y0 As Double, k As Double) As Double
+Function X1_strippingKremser_cascateLineari(a As Double, N As Double, XN1 As Double, Y0 As Double, k As Double) As Double
     Dim alfa As Double
     Dim beta As Double
     Dim Xeq As Double
     Xeq = Y0 / k
     alfa = XN1 * (a) ^ (N) * (a - 1) / ((a) ^ (N + 1) - 1)
     beta = Xeq * ((a) ^ (N) - 1) / ((a) ^ (N + 1) - 1)
-    kremser_X1_stripping = alfa + beta
+    X1_strippingKremser_cascateLineari = alfa + beta
 End Function
 
-Function kremser_N_nonLin_stripping(k As Double, X1 As Double, Y0 As Double, XN1 As Double, GL As Double) As Double
+Function N_stadi_strippingKremser(k As Double, X1 As Double, Y0 As Double, XN1 As Double, GL As Double) As Double
     Dim a As Double
     Dim B As Double
     Dim D As Double
@@ -613,21 +614,21 @@ Function kremser_N_nonLin_stripping(k As Double, X1 As Double, Y0 As Double, XN1
 End Function
 
 Function GLmin_stripping(k As Double, XN1 As Double, X1 As Double, Y0 As Double) As Double
-'DA SISTEMARE
-Dim alfa As Double
-Dim beta1 As Double
-Dim beta2 As Double
-Dim gamma1 As Double
-Dim gamma2 As Double
-Dim a As Double
-Dim B As Double
-Dim c As Double
-Dim q1 As Double
-Dim q2 As Double
-Dim q3 As Double
-Dim X0eq As Double
-Dim X1_sgn As Double
-Dim X2_sgn As Double
+
+	Dim alfa As Double
+	Dim beta1 As Double
+	Dim beta2 As Double
+	Dim gamma1 As Double
+	Dim gamma2 As Double
+	Dim a As Double
+	Dim B As Double
+	Dim c As Double
+	Dim q1 As Double
+	Dim q2 As Double
+	Dim q3 As Double
+	Dim X0eq As Double
+	Dim X1_sgn As Double
+	Dim X2_sgn As Double
 
     Yeq = k * XN1 / (1 + XN1 * (1 - k))
     alfa = 1 - k
@@ -660,8 +661,8 @@ Dim X2_sgn As Double
 End Function
 
 Function xi(wi As Variant, PM As Variant, NC As Integer, specie As Integer) As Double
-Dim PMmix As Double
-Dim i As Integer
+	Dim PMmix As Double
+	Dim i As Integer
 
     PMmix = 0
     For i = 1 To NC
@@ -678,8 +679,8 @@ Dim i As Integer
 End Function
 
 Function wi(xi As Variant, PM As Variant, NC As Integer, specie As Integer) As Double
-Dim PMmix As Double
-Dim i As Integer
+	Dim PMmix As Double
+	Dim i As Integer
 
     PMmix = 0
     For i = 1 To NC
@@ -699,12 +700,12 @@ Function NUT_1(S As Double, k As Double, y1 As Double, y2 As Double, x2 As Doubl
 End Function
 
 Function NUT_2(GL As Double, k As Double, y1 As Double, y2 As Double, x2 As Double) As Double
-Dim S As Double
+	Dim S As Double
     S = GL * k
     NUT_2 = Log((y1 - k * x2) * (1 - S) / (y2 - k * x2) + S) / (1 - S)
 End Function
 
-Function N_stadiSup_McCabeThiele(xD As Double, zF As Double, R As Double, alfa As Double) As Double
+Function N_stadiSup_asDouble(xD As Double, zF As Double, R As Double, alfa As Double) As Double
     Dim a As Double
     Dim B As Double
     Dim c As Double
@@ -722,10 +723,10 @@ Function N_stadiSup_McCabeThiele(xD As Double, zF As Double, R As Double, alfa A
     logS2 = 1 / (zF - delta) + 1 / (2 * delta + a + B)
     logS = Log(logS1 / logS2)
     logI = Log(-(a + delta) / (B + delta))
-    N_stadiSup_McCabeThiele = logS / logI
+    N_stadiSup_asDouble = logS / logI
 End Function
 
-Function N_stadiInf_McCabeThiele(xD As Double, xB As Double, zF As Double, zF_meno As Double, R As Double, alfa As Double, q As Double) As Double
+Function N_stadiInf_asDouble(xD As Double, xB As Double, zF As Double, zF_meno As Double, R As Double, alfa As Double, q As Double) As Double
     Dim a As Double
     Dim B As Double
     Dim c As Double
@@ -746,7 +747,7 @@ Function N_stadiInf_McCabeThiele(xD As Double, xB As Double, zF As Double, zF_me
     logS2 = 1 / (xB - delta) + 1 / (2 * delta + a + B)
     logS = Log(logS1 / logS2)
     logI = Log(-(a + delta) / (B + delta))
-    N_stadiInf_McCabeThiele = logS / logI
+    N_stadiInf_asDouble = logS / logI
 End Function
 
 Function Nmin_multicomponente(xD_lightKey As Double, xB_lightKey As Double, xD_heavyKey As Double, xB_heavyKey As Double, alfa_lightKey As Double) As Double
@@ -777,23 +778,18 @@ Function underwood_2(Rmin As Double, alfa As Variant, xD_Rmin As Variant, theta 
 End Function
 
 Function xD_new_multicomponente(Rmin As Double, k As Double, xD_Rmin As Double, xD_Nmin As Double) As Double
-Dim B As Double
-Dim a As Double
-Dim R As Double
+	Dim B As Double
+	Dim A As Double
+	Dim R As Double
 
     B = -(Rmin + 1) * (xD_Rmin - xD_Nmin)
-    a = xD_Nmin - B
+    A = xD_Nmin - B
     R = k * Rmin
     
     xD_new_multicomponente = a + B * R / (R + 1)
 End Function
 
 Function xD_Nmin(Nmin As Double, F As Double, D As Double, alfa As Double, z As Double, xD As Variant, xD_heavyKey As Double, xB_heavyKey As Double, indexDistribuito As Integer, NC As Integer) As Double
-Dim SF As Double
-Dim B As Double
-Dim D_xD As Double
-Dim D_new As Double
-
     B = F - D
     SF_hk = xD_heavyKey * D / xB_heavyKey / B
     
@@ -812,22 +808,22 @@ Dim D_new As Double
     xD_Nmin = D_xD / D_new
 End Function
 
-Function Nsup_Kirckbride(N_stadi As Double, z_hk As Double, z_lk As Double, xD_hk As Double, xB_lk As Double, B As Double, D As Double) As Double
+Function N_stadiSup_Kirckbride(N_stadi As Double, z_hk As Double, z_lk As Double, xD_hk As Double, xB_lk As Double, B As Double, D As Double) As Double
 
     Dim par As Double
     
     par = (z_hk / z_lk * (xB_lk / xD_hk) ^ (2) * B / D) ^ (0.206)
     
-    Nsup_Kirckbride = N_stadi * par / (1 + par)
+    N_stadiSup_Kirckbride = N_stadi * par / (1 + par)
     
-    Nsup_Kirckbride = Nsup_Kirckbride - 0.5 * Log(N_stadi) / Log(10)
+    N_stadiSup_Kirckbride = N_stadiSup_Kirckbride - 0.5 * Log(N_stadi) / Log(10)
 
 End Function
 
-Function Nstadi_CrossFlow_CascateLineari(E As Double, K As Double, YN As Double, Y0 As Double, X0 As Double)
-    Nstadi_CrossFlow_CascateLineari = Log((YN - K * X0) / (Y0 - K * X0)) / Log(E / (E + 1))
+Function N_stadi_crossFlow_cascateLineari(E As Double, K As Double, YN As Double, Y0 As Double, X0 As Double)
+    N_stadi_crossFlow_cascateLineari = Log((YN - K * X0) / (Y0 - K * X0)) / Log(E / (E + 1))
 End Function
 
-Function YN_CrossFlow_CascateLineari(E As Double, K As Double, Y0 As Double, X0 As Double, N As Double)
-    YN_CrossFlow_CascateLineari = K * X0 + (Y0 - K * X0) * (E / (E + 1)) ^ (N)
+Function YN_crossFlow_cascateLineari(E As Double, K As Double, Y0 As Double, X0 As Double, N As Double)
+    YN_crossFlow_cascateLineari = K * X0 + (Y0 - K * X0) * (E / (E + 1)) ^ (N)
 End Function
