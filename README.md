@@ -163,4 +163,5 @@ Il risultato ottenuto per zF coincide con zF_meno.
 
 ****la differenza tra NUT_1 e NUT_2 sta semplicemente nelle varibili di input.
 
+Supporta il lavoro:  https://paypal.me/eliaferretti
 Per qualsiasi problema o bug si contatti lo sviluppatore all'indirizzo: eliaferretti@outlook.it
